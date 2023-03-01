@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <!-- 通用 Mapper 继承的接口 -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+        </plugin>
+
+
+        <!-- Lombok插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.LombokPlugin">
+            <!-- @Data 默认开启,同时插件会对子类自动附加@EqualsAndHashCode(callSuper = true)，@ToString(callSuper = true) -->
+            <property name="@Data" value="true"/>
+            <!-- @Builder 必须在 Lombok 版本 >= 1.18.2 的情况下开启，对存在继承关系的类自动替换成@SuperBuilder -->
+            <property name="@Builder" value="false"/>
+            <!-- @NoArgsConstructor 和 @AllArgsConstructor 使用规则和Lombok一致 -->
+            <property name="@AllArgsConstructor" value="true"/>
+            <property name="@NoArgsConstructor" value="true"/>
+            <!-- @Getter、@Setter、@Accessors 等使用规则参见官方文档 -->
+            <property name="@Accessors(chain = true)" value="false"/>
+            <!-- 临时解决IDEA工具对@SuperBuilder的不支持问题，开启后(默认未开启)插件在遇到@SuperBuilder注解时会调用ModelBuilderPlugin来生成相应的builder代码 -->
+            <property name="supportSuperBuilderForIdea" value="false"/>
+        </plugin>
+
+        <commentGenerator>
+            <!-- 不生成时间戳 -->
+            <property name="suppressDate" value="false"/>
+            <!-- 生成注解 -->
+            <property name="suppressAllComments" value="false"/>
+            <!-- 注解采用数据库的标注，suppressAllComments 必须设置为 false 才会生效 -->
+            <property name="addRemarkComments" value="false"/>
+        </commentGenerator>
+
+        <!-- 数据库连接信息 -->
+        <jdbcConnection
+                driverClass="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql:///pethome?useUnicode=true;characterEncoding=utf8"
+                userId="root"
+                password="root"
+        >
+            <!-- oracle 获取数据库注解的方式，想要获取数据库注解必须添加 -->
+            <!--<property name="remarksReporting" value="true"/>-->
+            <!-- mysql 获取数据库注解的方式，想要获取数据库注解必须添加 -->
+            <property name="useInformationSchema" value="false"/>
+            <!-- 其它类型数据库暂不支持 -->
+        </jdbcConnection>
+
+        <!-- 生成实体类位置 -->
+        <javaModelGenerator targetPackage="com.sgfy.org.domain" targetProject="src/main/java">
+
+        </javaModelGenerator>
+
+        <!--生成 mapper 接口的位置-->
+        <!--        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.itsource.org.mapper" targetProject="src/main/java">
+
+                </javaClientGenerator>-->
+
+        <!--生成的 xml 映射文件位置-->
+        <!--        <sqlMapGenerator targetPackage="cn/itsource/org/mapper" targetProject="src/main/resources">
+
+                </sqlMapGenerator>-->
+
+        <!-- 数据表 和 JAVA 实体的映射，tableName 表名，domainObjectName 实体名 -->
+        <table tableName="t_shop" domainObjectName="Shop">
+
+        </table>
+    </context>
+</generatorConfiguration>
