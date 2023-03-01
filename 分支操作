@@ -1,0 +1,5 @@
+1.在git上创建develop分支
+2.在idea上获取最新代码
+3.在idea中新建feature分支
+4.修改文件 提交
+5.在git上对比 合并
